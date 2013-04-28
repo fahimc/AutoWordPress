@@ -1,0 +1,240 @@
+@import url(http://fonts.googleapis.com/css?family=Tauri);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300);
+
+*
+{
+	margin: 0;
+	padding:0;
+}
+html
+{
+	width:100%;
+	height:100%;
+	
+}
+body{
+	width:100%;
+	background-color: #141111;
+	font-family: 'Tauri', sans-serif;
+	overflow-x: hidden;
+	background: url(../image/pattern.png) #141111;
+}
+ul
+{
+	list-style: none;
+}
+p{
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+#bg
+{
+	width:100%;
+	height:594px;
+	position: absolute;
+	
+}
+#wrapper{
+	width:100%;
+	min-height:594px;
+	/*background: url(../image/z_bg.jpg) no-repeat ;*/
+	background-position: top left;
+        background-attachment: fixed;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	
+	/* This works in IE 8 & 9 too */
+	/* ... but also 5, 6, 7 */
+	filter: alpha(opacity=0);
+	
+	/* Older than Firefox 0.9 */
+	-moz-opacity:0;
+	
+	/* Safari 1.x (pre WebKit!) */
+	-khtml-opacity: 0;
+    
+	/* Modern!
+	/* Firefox 0.9+, Safari 2?, Chrome any?
+	/* Opera 9+, IE 9+ */
+	opacity: 0;
+}
+.grey
+{
+	width:100%;
+	height:594px;
+	background-color: #CAC9C9;
+	position: absolute;
+	z-index: 1;
+}
+.nav
+{
+	background: url(../image/nav.png) no-repeat;
+	width:260px;
+	height:inherit;
+	margin-left: 27px;
+	
+	float: left;
+	
+}
+#content
+{
+	float:left;
+	
+	width: 200px;
+	height:590px;
+}
+.clearBoth
+{
+	clear: both;
+}
+.buttonHolder
+{
+	margin-top: 65px;
+}
+.button
+{
+	width:100%;
+	text-align: center;
+	color:#82746f;
+	margin-bottom: 15px;
+	margin-top: 15px;
+	cursor: pointer;
+}
+.button:hover
+{
+	color:#FFFFFF;
+}
+.hr{
+	background: url(../image/hr.png) ;
+	width:80%;
+	height:2px;
+	margin-left: auto;
+	margin-right: auto;
+	
+}
+.nav .logo
+{
+	margin-top: 66px;
+}
+.nav .bottom
+{
+	width:100%;
+	height:95px;
+	background: url(../image/navBottom.png) no-repeat;
+}
+#footer
+{
+	width:100%;
+	height: 30px;
+	background-color:  #141111;
+	overflow: hidden;
+	display: none;
+}
+#footer .logo
+{
+	margin-top: 5px;
+	margin-left: 27px;
+}
+.page
+{
+	display: none;
+	background-color:  #141111;
+	position: absolute;
+	top:0;
+	color: #fff;
+	padding-bottom: 20px;
+}
+.page p
+{
+	padding: 10px 40px 10px 40px;
+}
+.page h1
+{
+	color:#685d59;
+	padding: 20px;
+}
+.venueImage
+{
+	width: 80%;
+	margin-left: 10%;
+	margin-bottom: 20px;
+	border: 1px solid #e4e4e4;
+}
+.map
+{
+	width: 80%;
+	margin-left: 10%;
+	height:300px;
+	margin-bottom: 20px;
+}
+#gallery 
+{
+	padding-bottom: 20px;
+}
+#form
+{
+	padding:20px;
+}
+#form .formLi
+{
+ 	float: left;
+ 	margin-right: 10px;
+ 	padding-top: 10px;
+}
+#form button
+{
+	height:30px;
+	padding: 5px 20px 5px 20px;
+	background-color: #1B8EE0;
+	border:0;
+	 -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+#form button:hover
+{
+	background-color: #59A9E3;
+}
+#form input
+{
+	height:15px;
+	padding: 5px 20px 5px 20px;
+	 -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    border-radius: 20px;
+}
+#formError
+{
+	padding:10px 20px 10px 20px;
+	color: #E01B6A;
+}
+#about p
+{
+	font-weight: normal;
+}
+#about h2
+{
+	color:#1BAFE0;
+	padding: 10px 40px 10px 40px;
+	font-size: 18px;
+	font-family: 'Open Sans Condensed', sans-serif;
+}
+#venue .title
+{
+	font-size: 27px;
+	color:#1BAFE0;
+}
+#venue .address
+{
+	color:#1BAFE0;
+}
+#contact a
+{
+	color:#1BAFE0;
+}
+#contact a:link
+{
+	color:#1BAFE0;
+}
