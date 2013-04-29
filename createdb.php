@@ -1,6 +1,6 @@
 <?php
 $myFile = "db.sql";
-$newsiteurl = "http://localhost:81/WordPressTest/client";
+$newsiteurl = "http://localhost:81/wordpresstest/client";
 //get contents and update site url
 $string = file_get_contents($myFile, "r");
 $string =str_replace("[siteurl]",$newsiteurl,$string);
@@ -25,9 +25,38 @@ else
   {
   echo "Error creating database: " . mysql_query();
   }
-mysql_select_db("wordpresstest");
-$result = mysql_query($string) or exit(mysql_error()); 
-if (!$result) {
-    die("Could not load. " . mysql_error());
+
+
+// OPEN CONNECTION...
+
+$url = $_SERVER['REQUEST_URI']; //returns the current URL
+$parts = explode('/',$url);
+$dir = $_SERVER['SERVER_NAME'];
+for ($i = 0; $i < count($parts) - 1; $i++) {
+ $dir .= $parts[$i] . "/";
 }
+$dir = "http://".$dir;
+echo $dir;
+$sql_filename = 'db.sql';
+$sql_contents = file_get_contents($dir.$sql_filename);
+$sql_contents = explode(";", $sql_contents);
+    
+$connection = $con;
+// mysql_select_db('wordpresstest', $con) or die(mysql_error());
+// 
+// foreach($sql_contents as $query){
+       // $result = mysql_query($query);
+       // if (!$result)
+            // echo "Error on import of ".$query;
+// }
+mysql_select_db('wordpresstest',$con);
+
+$file = $dir.$sql_filename;
+
+if($fp = file_get_contents($file)) {
+  $var_array = explode(';',$fp);
+  foreach($var_array as $value) {
+    mysql_query($value.';',$con);
+  }
+}  
 ?>
