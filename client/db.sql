@@ -396,7 +396,7 @@ CREATE TABLE IF NOT EXISTS `wp_options` (
 --
 
 INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`) VALUES
-(1, 'siteurl', '[siteurl]', 'yes'),
+(1, 'siteurl', 'http://localhost/AutoWordPress/createdb.php/client', 'yes'),
 (2, 'blogname', 'Zayn Chowdhury', 'yes'),
 (3, 'blogdescription', 'Just another WordPress site', 'yes'),
 (4, 'users_can_register', '0', 'yes'),
@@ -431,7 +431,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (33, 'blog_charset', 'UTF-8', 'yes'),
 (34, 'moderation_keys', '', 'no'),
 (35, 'active_plugins', 'a:2:{i:0;s:33:"custom-fields-creator/wck-cfc.php";i:1;s:23:"magic-fields-2/main.php";}', 'yes'),
-(36, 'home', '[home]', 'yes'),
+(36, 'home', 'http://localhost/AutoWordPress/createdb.php/client', 'yes'),
 (37, 'category_base', '', 'yes'),
 (38, 'ping_sites', 'http://rpc.pingomatic.com/', 'yes'),
 (39, 'advanced_edit', '0', 'yes'),

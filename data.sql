@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.2.4
+-- version 3.5.2.2
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Apr 27, 2013 at 11:38 AM
--- Server version: 5.1.41
--- PHP Version: 5.3.1
+-- Host: 127.0.0.1
+-- Generation Time: Apr 29, 2013 at 06:24 PM
+-- Server version: 5.5.27
+-- PHP Version: 5.4.7
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -16,58 +17,8 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Database: `zyne`
+-- Database: `wordpresstest`
 --
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_commentmeta`
---
-
-CREATE TABLE IF NOT EXISTS `wp_commentmeta` (
-  `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `comment_id` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `meta_key` varchar(255) DEFAULT NULL,
-  `meta_value` longtext,
-  PRIMARY KEY (`meta_id`),
-  KEY `comment_id` (`comment_id`),
-  KEY `meta_key` (`meta_key`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `wp_commentmeta`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_comments`
---
-
-CREATE TABLE IF NOT EXISTS `wp_comments` (
-  `comment_ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `comment_post_ID` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `comment_author` tinytext NOT NULL,
-  `comment_author_email` varchar(100) NOT NULL DEFAULT '',
-  `comment_author_url` varchar(200) NOT NULL DEFAULT '',
-  `comment_author_IP` varchar(100) NOT NULL DEFAULT '',
-  `comment_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `comment_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `comment_content` text NOT NULL,
-  `comment_karma` int(11) NOT NULL DEFAULT '0',
-  `comment_approved` varchar(20) NOT NULL DEFAULT '1',
-  `comment_agent` varchar(255) NOT NULL DEFAULT '',
-  `comment_type` varchar(20) NOT NULL DEFAULT '',
-  `comment_parent` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
-  PRIMARY KEY (`comment_ID`),
-  KEY `comment_post_ID` (`comment_post_ID`),
-  KEY `comment_approved_date_gmt` (`comment_approved`,`comment_date_gmt`),
-  KEY `comment_date_gmt` (`comment_date_gmt`),
-  KEY `comment_parent` (`comment_parent`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `wp_comments`
@@ -76,327 +27,12 @@ CREATE TABLE IF NOT EXISTS `wp_comments` (
 INSERT INTO `wp_comments` (`comment_ID`, `comment_post_ID`, `comment_author`, `comment_author_email`, `comment_author_url`, `comment_author_IP`, `comment_date`, `comment_date_gmt`, `comment_content`, `comment_karma`, `comment_approved`, `comment_agent`, `comment_type`, `comment_parent`, `user_id`) VALUES
 (1, 1, 'Mr WordPress', '', 'http://wordpress.org/', '', '2013-04-25 19:28:36', '2013-04-25 19:28:36', 'Hi, this is a comment.\nTo delete a comment, just log in and view the post&#039;s comments. There you will have the option to edit or delete them.', 0, '1', '', '', 0, 0);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_links`
---
-
-CREATE TABLE IF NOT EXISTS `wp_links` (
-  `link_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `link_url` varchar(255) NOT NULL DEFAULT '',
-  `link_name` varchar(255) NOT NULL DEFAULT '',
-  `link_image` varchar(255) NOT NULL DEFAULT '',
-  `link_target` varchar(25) NOT NULL DEFAULT '',
-  `link_description` varchar(255) NOT NULL DEFAULT '',
-  `link_visible` varchar(20) NOT NULL DEFAULT 'Y',
-  `link_owner` bigint(20) unsigned NOT NULL DEFAULT '1',
-  `link_rating` int(11) NOT NULL DEFAULT '0',
-  `link_updated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `link_rel` varchar(255) NOT NULL DEFAULT '',
-  `link_notes` mediumtext NOT NULL,
-  `link_rss` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`link_id`),
-  KEY `link_visible` (`link_visible`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `wp_links`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_mf_custom_fields`
---
-
-CREATE TABLE IF NOT EXISTS `wp_mf_custom_fields` (
-  `id` int(19) NOT NULL AUTO_INCREMENT,
-  `name` varchar(150) NOT NULL,
-  `label` varchar(150) NOT NULL,
-  `description` text,
-  `post_type` varchar(120) NOT NULL,
-  `custom_group_id` int(19) NOT NULL,
-  `type` varchar(100) NOT NULL,
-  `required_field` tinyint(1) DEFAULT NULL,
-  `display_order` mediumint(9) DEFAULT '0',
-  `duplicated` tinyint(1) DEFAULT NULL,
-  `active` tinyint(1) DEFAULT '1',
-  `options` text,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `wp_mf_custom_fields`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_mf_custom_field_options`
---
-
-CREATE TABLE IF NOT EXISTS `wp_mf_custom_field_options` (
-  `custom_field_id` int(11) NOT NULL,
-  `options` text COLLATE utf8_unicode_ci,
-  `default_option` text COLLATE utf8_unicode_ci,
-  PRIMARY KEY (`custom_field_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `wp_mf_custom_field_options`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_mf_custom_field_properties`
---
-
-CREATE TABLE IF NOT EXISTS `wp_mf_custom_field_properties` (
-  `custom_field_id` int(11) NOT NULL AUTO_INCREMENT,
-  `properties` text COLLATE utf8_unicode_ci,
-  PRIMARY KEY (`custom_field_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `wp_mf_custom_field_properties`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_mf_custom_groups`
---
-
-CREATE TABLE IF NOT EXISTS `wp_mf_custom_groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `label` varchar(255) NOT NULL,
-  `post_type` varchar(255) NOT NULL,
-  `duplicated` tinyint(1) DEFAULT '0',
-  `expanded` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `wp_mf_custom_groups`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_mf_custom_taxonomy`
---
-
-CREATE TABLE IF NOT EXISTS `wp_mf_custom_taxonomy` (
-  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
-  `type` varchar(20) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `description` text,
-  `arguments` text,
-  `active` tinyint(1) DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `wp_mf_custom_taxonomy`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_mf_module_groups`
---
-
-CREATE TABLE IF NOT EXISTS `wp_mf_module_groups` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `panel_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `duplicate` tinyint(1) NOT NULL,
-  `expanded` tinyint(4) DEFAULT NULL,
-  `at_right` tinyint(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `wp_mf_module_groups`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_mf_panel_category`
---
-
-CREATE TABLE IF NOT EXISTS `wp_mf_panel_category` (
-  `panel_id` int(11) NOT NULL,
-  `cat_id` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
-  PRIMARY KEY (`panel_id`,`cat_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `wp_mf_panel_category`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_mf_panel_custom_field`
---
-
-CREATE TABLE IF NOT EXISTS `wp_mf_panel_custom_field` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `group_id` int(11) NOT NULL,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `display_order` int(11) DEFAULT NULL,
-  `display_name` enum('true','false') COLLATE utf8_unicode_ci NOT NULL,
-  `display_description` enum('true','false') COLLATE utf8_unicode_ci NOT NULL,
-  `type` tinyint(4) NOT NULL,
-  `CSS` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `required_field` tinyint(4) DEFAULT NULL,
-  `duplicate` tinyint(1) NOT NULL,
-  `help_text` text COLLATE utf8_unicode_ci,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `wp_mf_panel_custom_field`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_mf_panel_standard_field`
---
-
-CREATE TABLE IF NOT EXISTS `wp_mf_panel_standard_field` (
-  `panel_id` int(11) NOT NULL,
-  `standard_field_id` int(11) NOT NULL,
-  PRIMARY KEY (`panel_id`,`standard_field_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `wp_mf_panel_standard_field`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_mf_posttypes`
---
-
-CREATE TABLE IF NOT EXISTS `wp_mf_posttypes` (
-  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
-  `type` varchar(20) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `description` text,
-  `arguments` text,
-  `active` tinyint(1) DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `wp_mf_posttypes`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_mf_posttypes_taxonomies`
---
-
-CREATE TABLE IF NOT EXISTS `wp_mf_posttypes_taxonomies` (
-  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
-  `type` varchar(10) NOT NULL DEFAULT 'posttype',
-  `name` tinytext NOT NULL,
-  `description` text NOT NULL,
-  `settings` text,
-  UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `wp_mf_posttypes_taxonomies`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_mf_post_meta`
---
-
-CREATE TABLE IF NOT EXISTS `wp_mf_post_meta` (
-  `id` int(11) NOT NULL,
-  `group_count` int(11) NOT NULL,
-  `field_count` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL,
-  `field_name` text COLLATE utf8_unicode_ci NOT NULL,
-  `order_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `wp_mf_post_meta`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_mf_write_panels`
---
-
-CREATE TABLE IF NOT EXISTS `wp_mf_write_panels` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `single` tinyint(1) NOT NULL DEFAULT '0',
-  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `display_order` int(11) DEFAULT NULL,
-  `capability_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `expanded` tinyint(4) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `wp_mf_write_panels`
---
-
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_options`
---
-
-CREATE TABLE IF NOT EXISTS `wp_options` (
-  `option_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `option_name` varchar(64) NOT NULL DEFAULT '',
-  `option_value` longtext NOT NULL,
-  `autoload` varchar(20) NOT NULL DEFAULT 'yes',
-  PRIMARY KEY (`option_id`),
-  UNIQUE KEY `option_name` (`option_name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=175 ;
-
 --
 -- Dumping data for table `wp_options`
 --
 
 INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`) VALUES
-(1, 'siteurl', '[siteurl]', 'yes'),
+(1, 'siteurl', 'http://localhost:81/WordPressTest/client', 'yes'),
 (2, 'blogname', 'Zayn Chowdhury', 'yes'),
 (3, 'blogdescription', 'Just another WordPress site', 'yes'),
 (4, 'users_can_register', '0', 'yes'),
@@ -431,7 +67,7 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (33, 'blog_charset', 'UTF-8', 'yes'),
 (34, 'moderation_keys', '', 'no'),
 (35, 'active_plugins', 'a:2:{i:0;s:33:"custom-fields-creator/wck-cfc.php";i:1;s:23:"magic-fields-2/main.php";}', 'yes'),
-(36, 'home', '[home]', 'yes'),
+(36, 'home', 'http://localhost:81/WordPressTest/client', 'yes'),
 (37, 'category_base', '', 'yes'),
 (38, 'ping_sites', 'http://rpc.pingomatic.com/', 'yes'),
 (39, 'advanced_edit', '0', 'yes'),
@@ -547,22 +183,6 @@ INSERT INTO `wp_options` (`option_id`, `option_name`, `option_value`, `autoload`
 (152, 'MAGIC_FIELDS_fist_time', '1', 'yes'),
 (153, 'mf_db_version', '3', 'yes');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_postmeta`
---
-
-CREATE TABLE IF NOT EXISTS `wp_postmeta` (
-  `meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `post_id` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `meta_key` varchar(255) DEFAULT NULL,
-  `meta_value` longtext,
-  PRIMARY KEY (`meta_id`),
-  KEY `post_id` (`post_id`),
-  KEY `meta_key` (`meta_key`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=30 ;
-
 --
 -- Dumping data for table `wp_postmeta`
 --
@@ -598,43 +218,6 @@ INSERT INTO `wp_postmeta` (`meta_id`, `post_id`, `meta_key`, `meta_value`) VALUE
 (28, 23, '_wp_attachment_metadata', 'a:5:{s:5:"width";i:1007;s:6:"height";i:1351;s:4:"file";s:16:"2013/04/z_bg.jpg";s:5:"sizes";a:3:{s:9:"thumbnail";a:4:{s:4:"file";s:16:"z_bg-150x150.jpg";s:5:"width";i:150;s:6:"height";i:150;s:9:"mime-type";s:10:"image/jpeg";}s:6:"medium";a:4:{s:4:"file";s:16:"z_bg-223x300.jpg";s:5:"width";i:223;s:6:"height";i:300;s:9:"mime-type";s:10:"image/jpeg";}s:5:"large";a:4:{s:4:"file";s:17:"z_bg-763x1024.jpg";s:5:"width";i:763;s:6:"height";i:1024;s:9:"mime-type";s:10:"image/jpeg";}}s:10:"image_meta";a:10:{s:8:"aperture";i:0;s:6:"credit";s:0:"";s:6:"camera";s:0:"";s:7:"caption";s:0:"";s:17:"created_timestamp";i:0;s:9:"copyright";s:0:"";s:12:"focal_length";i:0;s:3:"iso";i:0;s:13:"shutter_speed";i:0;s:5:"title";s:0:"";}}'),
 (29, 21, 'homecontent', 'a:1:{i:0;a:1:{s:16:"background-image";s:2:"23";}}');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_posts`
---
-
-CREATE TABLE IF NOT EXISTS `wp_posts` (
-  `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `post_author` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `post_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `post_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `post_content` longtext NOT NULL,
-  `post_title` text NOT NULL,
-  `post_excerpt` text NOT NULL,
-  `post_status` varchar(20) NOT NULL DEFAULT 'publish',
-  `comment_status` varchar(20) NOT NULL DEFAULT 'open',
-  `ping_status` varchar(20) NOT NULL DEFAULT 'open',
-  `post_password` varchar(20) NOT NULL DEFAULT '',
-  `post_name` varchar(200) NOT NULL DEFAULT '',
-  `to_ping` text NOT NULL,
-  `pinged` text NOT NULL,
-  `post_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `post_modified_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `post_content_filtered` longtext NOT NULL,
-  `post_parent` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `guid` varchar(255) NOT NULL DEFAULT '',
-  `menu_order` int(11) NOT NULL DEFAULT '0',
-  `post_type` varchar(20) NOT NULL DEFAULT 'post',
-  `post_mime_type` varchar(100) NOT NULL DEFAULT '',
-  `comment_count` bigint(20) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`ID`),
-  KEY `post_name` (`post_name`),
-  KEY `type_status_date` (`post_type`,`post_status`,`post_date`,`ID`),
-  KEY `post_parent` (`post_parent`),
-  KEY `post_author` (`post_author`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=25 ;
-
 --
 -- Dumping data for table `wp_posts`
 --
@@ -665,42 +248,12 @@ INSERT INTO `wp_posts` (`ID`, `post_author`, `post_date`, `post_date_gmt`, `post
 (23, 1, '2013-04-25 20:21:52', '2013-04-25 20:21:52', '', 'z_bg', '', 'inherit', 'open', 'open', '', 'z_bg', '', '', '2013-04-25 20:21:52', '2013-04-25 20:21:52', '', 0, 'http://localhost:81/ZynesWordPress/wp-content/uploads/2013/04/z_bg.jpg', 0, 'attachment', 'image/jpeg', 0),
 (24, 1, '2013-04-25 20:19:29', '2013-04-25 20:19:29', '', 'Home', '', 'inherit', 'open', 'open', '', '21-revision', '', '', '2013-04-25 20:19:29', '2013-04-25 20:19:29', '', 21, 'http://localhost:81/ZynesWordPress/?p=24', 0, 'revision', '', 0);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_terms`
---
-
-CREATE TABLE IF NOT EXISTS `wp_terms` (
-  `term_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(200) NOT NULL DEFAULT '',
-  `slug` varchar(200) NOT NULL DEFAULT '',
-  `term_group` bigint(10) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`term_id`),
-  UNIQUE KEY `slug` (`slug`),
-  KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
 --
 -- Dumping data for table `wp_terms`
 --
 
 INSERT INTO `wp_terms` (`term_id`, `name`, `slug`, `term_group`) VALUES
 (1, 'Uncategorized', 'uncategorized', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_term_relationships`
---
-
-CREATE TABLE IF NOT EXISTS `wp_term_relationships` (
-  `object_id` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `term_taxonomy_id` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `term_order` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`object_id`,`term_taxonomy_id`),
-  KEY `term_taxonomy_id` (`term_taxonomy_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `wp_term_relationships`
@@ -709,46 +262,12 @@ CREATE TABLE IF NOT EXISTS `wp_term_relationships` (
 INSERT INTO `wp_term_relationships` (`object_id`, `term_taxonomy_id`, `term_order`) VALUES
 (1, 1, 0);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_term_taxonomy`
---
-
-CREATE TABLE IF NOT EXISTS `wp_term_taxonomy` (
-  `term_taxonomy_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `term_id` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `taxonomy` varchar(32) NOT NULL DEFAULT '',
-  `description` longtext NOT NULL,
-  `parent` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `count` bigint(20) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`term_taxonomy_id`),
-  UNIQUE KEY `term_id_taxonomy` (`term_id`,`taxonomy`),
-  KEY `taxonomy` (`taxonomy`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
 --
 -- Dumping data for table `wp_term_taxonomy`
 --
 
 INSERT INTO `wp_term_taxonomy` (`term_taxonomy_id`, `term_id`, `taxonomy`, `description`, `parent`, `count`) VALUES
 (1, 1, 'category', '', 0, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_usermeta`
---
-
-CREATE TABLE IF NOT EXISTS `wp_usermeta` (
-  `umeta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_id` bigint(20) unsigned NOT NULL DEFAULT '0',
-  `meta_key` varchar(255) DEFAULT NULL,
-  `meta_value` longtext,
-  PRIMARY KEY (`umeta_id`),
-  KEY `user_id` (`user_id`),
-  KEY `meta_key` (`meta_key`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `wp_usermeta`
@@ -771,28 +290,6 @@ INSERT INTO `wp_usermeta` (`umeta_id`, `user_id`, `meta_key`, `meta_value`) VALU
 (14, 1, 'wp_dashboard_quick_press_last_post_id', '3'),
 (15, 1, 'wp_user-settings', 'editor=tinymce&hidetb=1'),
 (16, 1, 'wp_user-settings-time', '1366918970');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `wp_users`
---
-
-CREATE TABLE IF NOT EXISTS `wp_users` (
-  `ID` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `user_login` varchar(60) NOT NULL DEFAULT '',
-  `user_pass` varchar(64) NOT NULL DEFAULT '',
-  `user_nicename` varchar(50) NOT NULL DEFAULT '',
-  `user_email` varchar(100) NOT NULL DEFAULT '',
-  `user_url` varchar(100) NOT NULL DEFAULT '',
-  `user_registered` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
-  `user_activation_key` varchar(60) NOT NULL DEFAULT '',
-  `user_status` int(11) NOT NULL DEFAULT '0',
-  `display_name` varchar(250) NOT NULL DEFAULT '',
-  PRIMARY KEY (`ID`),
-  KEY `user_login_key` (`user_login`),
-  KEY `user_nicename` (`user_nicename`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `wp_users`

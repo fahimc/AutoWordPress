@@ -1,14 +1,36 @@
 <?php
-$myFile = "db.sql";
-$newsiteurl = "http://localhost:81/wordpresstest/client";
+if (!defined('SQLIMPORT'))define('SQLIMPORT',1);
+include_once 'sqlimport.php';
+include_once 'siteconfig.php';
+include_once 'createWPConfig.php';
+/*
+ * setup
+ */
+$config = new Config();
+$sqlImport  = new SQLImport();
+$clientName = "john"; 
+$newsiteurl = "client";
+$sqlFile = realpath ($config->THEME_URL.$config->SQL_SQL_FILENAME);
+$sqlImport->init($config);
+
+/*
+ * copy the sql file to new location and update the site url
+ */
+if (!copy($sqlFile, $newsiteurl."/".$config->SQL_SQL_FILENAME)) {
+    echo "failed to copy file...\n";
+}
+
 //get contents and update site url
-$string = file_get_contents($myFile, "r");
-$string =str_replace("[siteurl]",$newsiteurl,$string);
-$string =str_replace("[home]",$newsiteurl,$string);
-$fh = fopen($myFile, 'w') or die("Could not open: " . mysql_error());
+$string = file_get_contents($sqlFile, "r");
+$string =str_replace("[siteurl]","http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."/".$newsiteurl,$string);
+$string =str_replace("[home]","http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."/".$newsiteurl,$string);
+$fh = fopen($newsiteurl."/".$config->SQL_SQL_FILENAME, 'w') or die("Could not open: " . mysql_error());
 fwrite($fh, $string);
 fclose($fh);
 
+/*
+ * create new db
+ */
 
 $con = mysql_connect("localhost", "root", "");
 
@@ -27,36 +49,13 @@ else
   }
 
 
-// OPEN CONNECTION...
 
-$url = $_SERVER['REQUEST_URI']; //returns the current URL
-$parts = explode('/',$url);
-$dir = $_SERVER['SERVER_NAME'];
-for ($i = 0; $i < count($parts) - 1; $i++) {
- $dir .= $parts[$i] . "/";
-}
-$dir = "http://".$dir;
-echo $dir;
-$sql_filename = 'db.sql';
-$sql_contents = file_get_contents($dir.$sql_filename);
-$sql_contents = explode(";", $sql_contents);
-    
-$connection = $con;
-// mysql_select_db('wordpresstest', $con) or die(mysql_error());
-// 
-// foreach($sql_contents as $query){
-       // $result = mysql_query($query);
-       // if (!$result)
-            // echo "Error on import of ".$query;
-// }
-mysql_select_db('wordpresstest',$con);
+//import
+$sqlImport->import();
 
-$file = $dir.$sql_filename;
-
-if($fp = file_get_contents($file)) {
-  $var_array = explode(';',$fp);
-  foreach($var_array as $value) {
-    mysql_query($value.';',$con);
-  }
-}  
+/*
+ * update config.php
+ */
+ $wpConfig  = new WPConfig();
+ $wpConfig->init();
 ?>
