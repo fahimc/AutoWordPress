@@ -52,7 +52,7 @@ Class SQLImport {
 						if ($this -> blnDiagnostics === true)
 							$this -> diagnostic_info .= $query;
 
-						$result = mysql_query($query) or die(mysql_error() . '. The import has been terminated and did not complete the process.' . $query);
+						$result = mysql_query($query);
 
 						while (ob_get_level() > 0) {
 							ob_end_flush();
@@ -62,8 +62,8 @@ Class SQLImport {
 					if (is_string($query) === true) {
 						$query = array();
 					}
+					
 				}
-
 				fclose($this -> sqlfile);
 			}
 			$this -> description = "File " . $filename . " successfully imported into the " . $this -> database_name . " database.";
@@ -75,7 +75,8 @@ Class SQLImport {
 
 		}
 
-		echo $description;
+		return $this -> description;
+		
 	}
 
 }

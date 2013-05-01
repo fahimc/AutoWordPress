@@ -10,6 +10,7 @@ $config = new Config();
 $sqlImport  = new SQLImport();
 $clientName = "john"; 
 $newsiteurl = "client";
+$clientDomain = "http://localhost/AutoWordPress/client";
 $sqlFile = realpath ($config->THEME_URL.$config->SQL_SQL_FILENAME);
 $sqlImport->init($config);
 
@@ -22,8 +23,9 @@ if (!copy($sqlFile, $newsiteurl."/".$config->SQL_SQL_FILENAME)) {
 
 //get contents and update site url
 $string = file_get_contents($sqlFile, "r");
-$string =str_replace("[siteurl]","http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."/".$newsiteurl,$string);
-$string =str_replace("[home]","http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']."/".$newsiteurl,$string);
+$string =str_replace("[siteurl]",$clientDomain,$string);
+$string =str_replace("[posturl]",$clientDomain."/",$string);
+$string =str_replace("[home]",$clientDomain,$string);
 $fh = fopen($newsiteurl."/".$config->SQL_SQL_FILENAME, 'w') or die("Could not open: " . mysql_error());
 fwrite($fh, $string);
 fclose($fh);
@@ -49,13 +51,15 @@ else
   }
 
 
-
+echo"here 1";
 //import
 $sqlImport->import();
 
 /*
  * update config.php
  */
+ echo "here 2";
  $wpConfig  = new WPConfig();
+  $wpConfig->config=$config;
  $wpConfig->init();
 ?>
