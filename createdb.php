@@ -51,15 +51,27 @@ else
   }
 
 
-echo"here 1";
+
 //import
 $sqlImport->import();
 
 /*
  * update config.php
  */
- echo "here 2";
+
  $wpConfig  = new WPConfig();
   $wpConfig->config=$config;
  $wpConfig->init();
+ 
+ /*
+  * test url
+  */
+$file_headers = @get_headers($clientDomain);
+if($file_headers[0] == 'HTTP/1.1 404 Not Found') {
+    $exists = false;
+}
+else {
+    $exists = true;
+}
+ echo "<br> page exists ".$exists;
 ?>
